@@ -1,10 +1,16 @@
 package com.reiswn.HelpDeskDemo.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -42,6 +48,12 @@ public class User {
 	@Column
 	private Boolean active;
 
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "users_roles",
+			   joinColumns = @JoinColumn(name = "user_id"),
+			   inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<Role> roles;
+	
 	public User() {}
 	
 	public User(String email, String name, String lastName, String password, Boolean active) {
@@ -132,6 +144,14 @@ public class User {
 	 */
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 	
 	
