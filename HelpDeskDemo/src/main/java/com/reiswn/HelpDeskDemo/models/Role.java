@@ -19,30 +19,30 @@ public class Role {
 	
 	@Column()
 	@NotEmpty(message = "Can not be empty")
-	private String roleName;
+	private String name;
 	
 	
 	public Role() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Role(String roleName) {
-		this.roleName = roleName;
+	public Role(String name) {
+		this.name = name;
 	}
 	
-	public Role(Long id, String roleName) {
+	public Role(Long id, String name) {
 		this.id = id;
-		this.roleName = roleName;
+		this.name = name;
 	}
 
 
-	public String getRoleName() {
-		return roleName;
+	public String getName() {
+		return name;
 	}
 
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
