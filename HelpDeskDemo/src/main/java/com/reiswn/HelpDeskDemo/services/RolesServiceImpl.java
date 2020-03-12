@@ -1,6 +1,7 @@
 package com.reiswn.HelpDeskDemo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,7 @@ public class RolesServiceImpl implements RolesService {
 	
 	@Override
 	public List<Role> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repository.findAll();
 	}
 
 	@Override
@@ -29,6 +29,21 @@ public class RolesServiceImpl implements RolesService {
 		role.setName(role.getName().toUpperCase());
 		Role roleCreated = this.repository.save(role);
 		return roleCreated;
+	}
+	
+	@Override
+	public Boolean delete(Long id) {
+		Role role = (Role) findbyId(id);
+		if(role != null) {
+			this.repository.deleteById(id);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private Object findbyId(Long id) {
+		return this.repository.findById(id);
 	}
 
 	

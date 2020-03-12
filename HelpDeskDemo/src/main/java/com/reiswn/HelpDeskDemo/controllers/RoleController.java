@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,6 +30,7 @@ public class RoleController {
 	
 	@GetMapping
 	public String index(Model model) {
+		model.addAttribute("list", this.roleService.findAll());
 		return "roles/index";
 	}
 	
@@ -56,9 +58,12 @@ public class RoleController {
 	}
 	
 	
-	@DeleteMapping
-	public String delete(Model model) {
-		return null;
+	@DeleteMapping("{id}")
+	public String delete(@PathVariable("id") Long id, Model model) {
+		//Role role = this.roleService.findById(id);
+		this.roleService.delete(id);
+		
+		return "redirect:/roles";
 	}
 	
 	
