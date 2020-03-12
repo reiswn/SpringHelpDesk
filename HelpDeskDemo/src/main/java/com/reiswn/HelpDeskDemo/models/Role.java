@@ -17,7 +17,7 @@ public class Role {
 	@Column
 	private Long id;
 	
-	@Column()
+	@Column
 	@NotEmpty(message = "Can not be empty")
 	private String name;
 	

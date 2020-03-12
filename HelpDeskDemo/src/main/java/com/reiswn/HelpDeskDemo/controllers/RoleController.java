@@ -49,7 +49,7 @@ public class RoleController {
 	public String save(@Valid @ModelAttribute("role") Role role, BindingResult bindingResult, Model model) {
 		
 		if(bindingResult.hasErrors()) {
-			return "redirect:/roles/new";
+			return "roles/create";
 		}
 		
 		Role roleCreated = this.roleService.create(role);
