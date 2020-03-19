@@ -24,7 +24,6 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
 	private Long id;
 	
 	@Column
@@ -46,7 +45,7 @@ public class User {
 	private String password;
 	
 	@Column
-	private Boolean active;
+	private Boolean active = true;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles",

@@ -4,18 +4,33 @@
 	  layout:decorator="layout">
 
 	<th:block layout:fragment="content">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Teste</td>
-					<td>Email Teste</td>
-			</tbody>		
-		</table>
+		<div class="col-xs-12 col-md-12">
+			<a href="/users/new" class="btn btn-success">Create</a>
+		</div>
+		<div class="col-xs-12 col-md-12">
+		<h5 class="mt-4 mb-4">Listing Roles</h5>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Last name</th>
+						<th>Email</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${list}">
+						<td th:text="${user.name}"></td>
+						<td th:text="${user.lastName}"></td>
+						<td th:text="${user.email}"></td>
+						<td>
+							<form th:action="@{/users/{id}(id = ${user.id})}" th:method="delete">
+								<button class="btn btn-danger">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>		
+			</table>
+		</div>
 	</th:block>
 </html>

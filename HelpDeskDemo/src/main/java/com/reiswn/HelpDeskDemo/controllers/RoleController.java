@@ -53,6 +53,7 @@ public class RoleController {
 		}
 		
 		Role roleCreated = this.roleService.create(role);
+		System.out.println(roleCreated);
 		
 		return "redirect:/roles";
 	}
