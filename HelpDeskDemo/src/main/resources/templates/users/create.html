@@ -5,9 +5,8 @@
 
 <th:block layout:fragment="content">
 	<div class="col-xs-12 col-md-12 text-center">
-		<h4>Create new Roles</h4>
-		<form action="" th:action="@{/users/}" th:object="${user}"
-			th:method="post">
+		<h4>Create new Users</h4>
+		<form action="" th:action="@{/users/}" th:object="${user}" th:method="post">
 			<div class="row">
 				<div class="form-group col-md-6 col-xs-12">
 					<input type="text" th:field="*{name}" name="name" placeholder="Enter user name:" class="form-control" /> 

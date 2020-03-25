@@ -8,13 +8,14 @@
 			<a href="/users/new" class="btn btn-success">Create</a>
 		</div>
 		<div class="col-xs-12 col-md-12">
-		<h5 class="mt-4 mb-4">Listing Roles</h5>
+		<h5 class="mt-4 mb-4">Listing Users</h5>
 			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<th>Name</th>
 						<th>Last name</th>
 						<th>Email</th>
+						<th>Active</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -23,8 +24,10 @@
 						<td th:text="${user.name}"></td>
 						<td th:text="${user.lastName}"></td>
 						<td th:text="${user.email}"></td>
+						<td th:text="${user.active}"></td>
 						<td>
-							<form th:action="@{/users/{id}(id = ${user.id})}" th:method="delete">
+							<a th:href="@{/users/edit/{id}(id = ${user.id})}" class="btn btn-info inline">Edit</a>
+							<form th:action="@{/users/delete/{id}(id = ${user.id})}" th:method="post">
 								<button class="btn btn-danger">Delete</button>
 							</form>
 						</td>

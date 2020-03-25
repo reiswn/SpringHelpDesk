@@ -10,5 +10,7 @@ public interface RolesService {
 	public List<Role> findAll();
 	public Role create(Role role);
 	Boolean delete(Long id);
+	public Boolean update(Long id, Role role);
+	public Role show(Long id);
 	
 }

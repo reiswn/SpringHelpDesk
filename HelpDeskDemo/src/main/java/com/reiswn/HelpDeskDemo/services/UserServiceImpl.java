@@ -1,9 +1,9 @@
 package com.reiswn.HelpDeskDemo.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.reiswn.HelpDeskDemo.models.User;
@@ -14,9 +14,13 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public UserServiceImpl(UserRepository repository) {
+	public UserServiceImpl(UserRepository repository, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.repository = repository;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
 	@Override
@@ -26,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User create(User user) {
+		user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 		return this.repository.save(user);
 	}
 
@@ -43,11 +48,32 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Boolean update(Long id, User user) {
+		User userExists = findById(id);
 
-		return null;
+		if (userExists != null) {
+			//pattern builder could be used
+			userExists.setId(user.getId());
+			userExists.setName(user.getName());
+			userExists.setLastName(user.getLastName());
+			userExists.setEmail(user.getEmail());
+			userExists.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+			userExists.setActive(user.getActive());
+			
+			this.repository.save(userExists);
+			
+			return true;
+		}
+
+		return false;
+	}
+	
+	@Override
+	public User show(Long id) {
+		return this.repository.findById(id).orElse(null);
 	}
 	
 	private User findById(Long id) {
 		return this.repository.findById(id).orElse(null);
 	}
+	
 }

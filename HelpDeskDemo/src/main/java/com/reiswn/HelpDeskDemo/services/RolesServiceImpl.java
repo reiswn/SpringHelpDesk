@@ -32,7 +32,7 @@ public class RolesServiceImpl implements RolesService {
 	
 	@Override
 	public Boolean delete(Long id) {
-		Role role = (Role) findbyId(id);
+		Role role = findById(id);
 		if(role != null) {
 			this.repository.deleteById(id);
 			return true;
@@ -41,8 +41,30 @@ public class RolesServiceImpl implements RolesService {
 		return false;
 	}
 	
-	private Object findbyId(Long id) {
-		return this.repository.findById(id);
+	@Override
+	public Boolean update(Long id, Role role) {
+		Role roleExists = findById(id);
+
+		if (roleExists != null) {
+			//pattern builder could be used
+			roleExists.setId(role.getId());
+			roleExists.setName(role.getName());
+			
+			this.repository.save(roleExists);
+			
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public Role show(Long id) {
+		return this.repository.findById(id).orElse(null);
+	}
+	
+	private Role findById(Long id) {
+		return this.repository.findById(id).orElse(null);
 	}
 
 	

@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.reiswn.HelpDeskDemo.models.User;
 import com.reiswn.HelpDeskDemo.services.UserService;
-
 
 @Controller
 @RequestMapping("/users")
@@ -23,43 +22,64 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
-	
+
+	/* INDEX */
 	@GetMapping
 	public String index(Model model) {
 		model.addAttribute("list", this.userService.findAll());
 		return "users/index";
 	}
-	
+
+	/* CREATE */
 	@GetMapping("/new")
 	public String create(Model model) {
 		model.addAttribute("user", new User());
 		return "users/create";
 	}
-	
-	/*@GetMapping("/{id}")
-	public String edit(@PathVariable("id") Long id, Model model) {
-		return "users/edit";
-	}*/
-	
+
+	/* SAVE */
 	@PostMapping
 	public String save(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+	
 		if (bindingResult.hasErrors()) {
 			return "users/create";
 		}
-		
-		this.userService.create(user);
-		
+
+		User userCreated = this.userService.create(user);
+		System.out.println(userCreated);
+
 		return "redirect:/users";
 	}
 	
-	@PostMapping("{id}")
+	/* EDIT */
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Long id, Model model) {
+		User user = this.userService.show(id);
+		model.addAttribute("user", user);
+		return "users/edit";
+	}
+
+	/* UPDATE */
+	@RequestMapping(value="/update/{id}", method = RequestMethod.POST)
+	public String update(@PathVariable("id") Long id, @Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			return "users/edit";
+		}
+
+		this.userService.update(id, user);
+
+		return "redirect:/users";
+	}
+
+	/* DELETE */
+	@RequestMapping(value="/delete/{id}", method = RequestMethod.POST)
 	public String delete(@PathVariable("id") Long id, Model model) {
 		this.userService.delete(id);
-		
+
 		return "redirect:/users";
 	}
 }
