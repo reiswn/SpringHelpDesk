@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Boolean update(Long id, User user) {
 		User userExists = findById(id);
-
+		
 		if (userExists != null) {
 			//pattern builder could be used
 			userExists.setId(user.getId());
@@ -72,6 +72,10 @@ public class UserServiceImpl implements UserService {
 			userExists.setEmail(user.getEmail());
 			userExists.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 			userExists.setActive(user.getActive());
+			
+			Role userRole = this.roleRepository.findByName(user.getRoles().iterator().next().getName());
+			
+			userExists.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 			
 			this.repository.save(userExists);
 			
