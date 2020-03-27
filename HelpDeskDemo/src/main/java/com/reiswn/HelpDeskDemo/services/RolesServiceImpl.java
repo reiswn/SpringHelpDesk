@@ -41,32 +41,25 @@ public class RolesServiceImpl implements RolesService {
 		return false;
 	}
 	
-	@Override
-	public Boolean update(Long id, Role role) {
-		Role roleExists = findById(id);
-
-		if (roleExists != null) {
-			//pattern builder could be used
-			roleExists.setId(role.getId());
-			roleExists.setName(role.getName());
-			
-			this.repository.save(roleExists);
-			
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
-	public Role show(Long id) {
-		return this.repository.findById(id).orElse(null);
-	}
-	
 	private Role findById(Long id) {
 		return this.repository.findById(id).orElse(null);
 	}
 
-	
-	
+	@Override
+	public Role findByName(String name) {
+		return this.repository.findByName(name);
+	}
+
+	@Override
+	public Role show(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean update(Long id, Role role) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

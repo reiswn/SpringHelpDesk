@@ -23,7 +23,7 @@
 						<td th:text="${role.name}"></td>
 						<td>
 							<a th:href="@{/roles/edit/{id}(id = ${role.id})}" class="btn btn-info inline">Edit</a>
-							<form th:action="@{/roles/delete/{id}(id = ${role.id})}" th:method="post">
+							<form th:action="@{/roles/delete/{id}(id = ${role.id})}" th:method="post" class="inline">
 								<button class="btn btn-danger">Delete</button>
 							</form>
 						</td>

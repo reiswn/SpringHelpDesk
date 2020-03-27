@@ -35,6 +35,13 @@
 					th:errors="*{password}">User password error</span>
 			</div>
 			<div class="form-group">
+				<select th:field="*{roles}" class="custom-select">
+					<option th:each="role : ${roles}" th:value="${role.id}"
+						th:text="${role.name}"
+						th:selected="${role.id == user.roles[0].id}"></option>
+				</select>
+			</div>
+			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Save</button>
 				<a href="/users" class="btn btn-secondary">Back</a>
 			</div>
