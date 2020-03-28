@@ -41,7 +41,7 @@ public class TicketController {
 	@GetMapping
 	public String index(Model model) {
 		model.addAttribute("list", this.ticketService.findAll());
-	//	model.addAttribute("userLoggedIn", this.userService.findCurrentUser());
+		model.addAttribute("userLoggedIn", this.userService.findCurrentUser());
 		return "ticket/index";
 	}
 	
