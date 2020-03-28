@@ -56,14 +56,6 @@ public class RoleController {
 		return "redirect:/roles";
 	}
 	
-	/* EDIT */
-	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") Long id, Model model) {
-		Role role = this.roleService.show(id);
-		model.addAttribute("role", role);
-		return "roles/edit";
-	}
-
 	/* UPDATE */
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public String update(@PathVariable("id") Long id, @Valid @ModelAttribute("role") Role role,

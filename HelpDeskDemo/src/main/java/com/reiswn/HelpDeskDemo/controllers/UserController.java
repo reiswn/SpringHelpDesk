@@ -45,7 +45,9 @@ public class UserController {
 	/* CREATE */
 	@GetMapping("/new")
 	public String create(Model model) {
+		List<Role> roles = this.rolesService.findAll();
 		model.addAttribute("user", new User());
+		model.addAttribute("roles", roles);
 		return "users/create";
 	}
 
