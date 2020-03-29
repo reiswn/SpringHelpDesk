@@ -1,7 +1,5 @@
 package com.reiswn.HelpDeskDemo.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.reiswn.HelpDeskDemo.models.Interaction;
 import com.reiswn.HelpDeskDemo.models.Ticket;
-import com.reiswn.HelpDeskDemo.services.RolesService;
 import com.reiswn.HelpDeskDemo.services.TicketService;
 import com.reiswn.HelpDeskDemo.services.UserService;
 
@@ -29,9 +27,6 @@ public class TicketController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private RolesService roleService;
 	
 	public TicketController(TicketService ticketService, UserService userService) {
 		this.ticketService = ticketService;
@@ -51,7 +46,7 @@ public class TicketController {
 		//List<Interaction> interactions = ticket.getInteractions();
 		
 		model.addAttribute("ticket", ticket);
-		//model.addAttribute("interaction", new Interaction());
+		model.addAttribute("interaction", new Interaction());
 		//model.addAttribute("interactions", interactions);
 		//model.addAttribute("userLoggedIn", this.userService.findCurrentUser());		
 		

@@ -1,7 +1,9 @@
 package com.reiswn.HelpDeskDemo.models;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -49,6 +52,12 @@ public class Ticket {
 	@JoinColumn(name = "technician_id")
 	@JsonBackReference
 	private User technician;
+	
+	@Column
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ticket")
+	private List<Interaction> interactions;
+	
+	
 
 	@PrePersist
 	public void prePersist() {
