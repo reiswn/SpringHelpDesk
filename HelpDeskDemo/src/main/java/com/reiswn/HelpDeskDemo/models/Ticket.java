@@ -179,6 +179,20 @@ public class Ticket {
 	public void setTechnician(User technician) {
 		this.technician = technician;
 	}
+
+	/**
+	 * @return the interactions
+	 */
+	public List<Interaction> getInteractions() {
+		return interactions;
+	}
+
+	/**
+	 * @param interactions the interactions to set
+	 */
+	public void setInteractions(List<Interaction> interactions) {
+		this.interactions = interactions;
+	}
 	
 	
 	

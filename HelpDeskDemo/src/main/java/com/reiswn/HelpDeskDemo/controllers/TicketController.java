@@ -1,5 +1,7 @@
 package com.reiswn.HelpDeskDemo.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +45,12 @@ public class TicketController {
 	@GetMapping("{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
 		Ticket ticket = this.ticketService.show(id);
-		//List<Interaction> interactions = ticket.getInteractions();
+		List<Interaction> interactions = ticket.getInteractions();
 		
 		model.addAttribute("ticket", ticket);
 		model.addAttribute("interaction", new Interaction());
-		//model.addAttribute("interactions", interactions);
-		//model.addAttribute("userLoggedIn", this.userService.findCurrentUser());		
+		model.addAttribute("interactions", interactions);
+		model.addAttribute("userLoggedIn", this.userService.findCurrentUser());		
 		
 		return "ticket/show";
 	}
