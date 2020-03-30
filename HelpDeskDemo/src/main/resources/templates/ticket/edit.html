@@ -30,6 +30,17 @@
 								</option>
 							</select>
 						</div>
+						<div class="form-group" th:if="${interactions_count > 0}">
+							<label class="custom-control custom-checkbox" th:if="${userLoggedIn.id == ticket.userOpen.id or userLoggedIn.roles[0].name == 'ADMIN'}">
+								<input type="checkbox" th:field="*{finished}" class="custom-control-input" th:checked="${ticket.finished}" 
+								/>
+								<span class="custom-control-indicator"></span>
+								<span class="custom-control-description">Closed?</span>
+							</label>					
+						</div>
+						<div class="form-group" th:if="${interactions_count} == 0">
+							<p class="text-danger">Need at least one interaction to close this ticket</p>
+						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary" >Save</button>
 							<a href="/tickets" class="btn btn-secondary">Back</a>

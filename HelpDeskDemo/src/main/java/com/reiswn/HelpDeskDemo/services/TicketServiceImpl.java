@@ -19,7 +19,7 @@ import com.reiswn.HelpDeskDemo.services.UserService;
 @Service
 public class TicketServiceImpl implements TicketService {
 
-	private final Long ROLE_ID = (long) 4;
+	//private final Long ROLE_ID = (long) 4;
 	private final String ROLE_NAME = "ADMIN";
 	
 	@Autowired

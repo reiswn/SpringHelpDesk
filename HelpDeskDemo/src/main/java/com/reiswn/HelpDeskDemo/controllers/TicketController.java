@@ -57,13 +57,13 @@ public class TicketController {
 	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Long id, Model model) {
-		//Ticket ticket = this.ticketService.show(id);
-		//List<Interaction> interactions = ticket.getInteractions();
+		Ticket ticket = this.ticketService.show(id);
+		List<Interaction> interactions = ticket.getInteractions();
 		
 		model = this.ticketService.findAllTechinician(model);
 		model.addAttribute("ticket", this.ticketService.show(id));
-		//model.addAttribute("interactions_count", interactions.size());		
-		//model.addAttribute("userLoggedIn", this.userService.findCurrentUser());		
+		model.addAttribute("interactions_count", interactions.size());		
+		model.addAttribute("userLoggedIn", this.userService.findCurrentUser());		
 		
 		return "ticket/edit";
 	}
