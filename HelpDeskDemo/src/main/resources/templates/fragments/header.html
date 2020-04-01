@@ -19,6 +19,8 @@
 				sec:authorize="hasAuthority('ADMIN')">Roles</a></li>
 			<li class="nav-item"><a href="/tickets" class="nav-link">Tickets</a>
 			</li>
+			<li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a
+				href="/reports" class="nav-link">Reports</a></li>
 		</ul>
 		<ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
 			<li class="nav-item"><a href="/logout" class="nav-link">Logout</a>
