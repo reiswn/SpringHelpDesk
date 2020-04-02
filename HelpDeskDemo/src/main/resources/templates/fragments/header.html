@@ -20,7 +20,9 @@
 			<li class="nav-item"><a href="/tickets" class="nav-link">Tickets</a>
 			</li>
 			<li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a
-				href="/reports" class="nav-link">Reports</a></li>
+				href="/reports/tickets" class="nav-link">Reports Ticket HTML</a></li>
+			<li class="nav-item" sec:authorize="hasAuthority('ADMIN')"><a
+				href="/reports/tickets/pdfgen" class="nav-link">Reports Ticket PDF</a></li>
 		</ul>
 		<ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
 			<li class="nav-item"><a href="/logout" class="nav-link">Logout</a>
